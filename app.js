@@ -27,6 +27,17 @@ app.get('/contact', (req,res) => {
     res.render('contact',{contactContent:contactContent});
 })
 
+app.get('/compose', (req,res) => {
+    res.render('compose');
+})
+
+app.post('/', (req,res) => {
+    let post = {
+        title: req.body.postTitle,
+        content: req.body.postContent
+    };
+    console.log(post);
+})
 
 
 app.listen(3000, () => {
