@@ -6,7 +6,7 @@
 
 <% posts.forEach(post => { %>
     <h1><%= post.title %></h1>
-    <p><%= post.truncateContent %></p>
+    <p><%= post.truncateContent %> <a href="/posts/<%= post.url %>">Continuar Lendo</a></p>
 <%}); %>
     
 

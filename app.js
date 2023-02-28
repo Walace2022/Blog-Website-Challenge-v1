@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const _ = require('lodash');
-const { truncate } = require('lodash');
+
 
 const app = express();
 
@@ -54,8 +54,9 @@ app.post('/', (req,res) => {
 
     let post = {
         title: req.body.postTitle,
+        url:_.kebabCase(req.body.postTitle),
         content: req.body.postContent,
-        truncateContent: stringTruncate(req.body.postContent,100)
+        truncateContent: _.truncate(req.body.postContent,{length:100})
     };
     posts.push(post);
 
