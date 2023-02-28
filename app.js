@@ -9,7 +9,7 @@ const app = express();
 app.set('view engine','ejs');
 
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 const homeContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, facilis accusamus excepturi assumenda deleniti praesentium nesciunt soluta consectetur iusto saepe obcaecati est molestias. Enim exercitationem iusto sapiente ullam vero totam?";
 const aboutContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, iste. Et, maxime, minima voluptatibus nobis aliquid dicta ratione molestiae, atque magni fuga facilis expedita dolore minus unde dignissimos iste optio!";
