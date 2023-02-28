@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
+const _ = require('lodash');
+const { truncate } = require('lodash');
 
 const app = express();
 
@@ -14,6 +16,11 @@ const aboutContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. A
 const contactContent = "Diferente Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, iste. Et, maxime, minima voluptatibus nobis aliquid dicta ratione molestiae, atque magni fuga facilis expedita dolore minus unde dignissimos iste optio!";
 
 let posts = [];
+
+let stringTruncate = (str, length) =>{
+    let dots = str.length > length ? '...':'';
+    return str.substring(0,length)+dots;
+}
  
 app.get('/', (req,res) => {
     res.render('home',{homeContent:homeContent,posts:posts});
@@ -31,10 +38,24 @@ app.get('/compose', (req,res) => {
     res.render('compose');
 })
 
+app.get('/posts/:title', (req,res) => {
+    const currentTitle= _.lowerCase(req.params.title);
+
+    posts.forEach(post =>{
+        const postTitle = _.lowerCase(post.title);
+
+        if(currentTitle === postTitle){
+         res.render('post',{post:post});
+         }
+    })
+})
+
 app.post('/', (req,res) => {
+
     let post = {
         title: req.body.postTitle,
-        content: req.body.postContent
+        content: req.body.postContent,
+        truncateContent: stringTruncate(req.body.postContent,100)
     };
     posts.push(post);
 
