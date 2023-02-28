@@ -13,10 +13,10 @@ const homeContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vo
 const aboutContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, iste. Et, maxime, minima voluptatibus nobis aliquid dicta ratione molestiae, atque magni fuga facilis expedita dolore minus unde dignissimos iste optio!";
 const contactContent = "Diferente Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, iste. Et, maxime, minima voluptatibus nobis aliquid dicta ratione molestiae, atque magni fuga facilis expedita dolore minus unde dignissimos iste optio!";
 
-
-
+let posts = [];
+ 
 app.get('/', (req,res) => {
-    res.render('home',{homeContent:homeContent});
+    res.render('home',{homeContent:homeContent,posts:posts});
 })
 
 app.get('/about', (req,res) => {
@@ -36,7 +36,9 @@ app.post('/', (req,res) => {
         title: req.body.postTitle,
         content: req.body.postContent
     };
-    console.log(post);
+    posts.push(post);
+
+    res.redirect('/');
 })
 
 
